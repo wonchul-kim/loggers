@@ -4,7 +4,7 @@
     "formatters": {
       "colored": {
         "()": "coloredlogs.ColoredFormatter",
-        "format": "%(asctime)s - %(name)s - %(pathname)s - %(funcName)s (line: %(lineno)d)- [%(levelname)s] - %(message)s",
+        "format": "%(asctime)s - %(name)s - %(pathname)s - %(funcName)s (line: %(lineno)d)- [%(levelname)s] %(message)s",
         "datefmt": "%Y-%m-%d %H:%M:%S"
       },
       "simple": {
@@ -13,34 +13,22 @@
       }
     },
     "handlers": {
-      "console": {
+      "stream": {
         "class": "logging.StreamHandler",
-        "level": "INFO",
+        "level": "DEBUG",
         "formatter": "colored",
         "stream": "ext://sys.stdout"
       },
-      "file_debug": {
+      "file": {
         "class": "logging.FileHandler",
         "level": "DEBUG",
         "formatter": "simple",
-        "filename": "debug.log"
-      },
-      "file_info": {
-        "class": "logging.FileHandler",
-        "level": "INFO",
-        "formatter": "simple",
-        "filename": "info.log"
-      },
-      "file_error": {
-        "class": "logging.FileHandler",
-        "level": "ERROR",
-        "formatter": "simple",
-        "filename": "error.log"
+        "filename": "log.log"
       }
     },
     "root": {
       "level": "DEBUG",
-      "handlers": ["console", "file_debug", "file_info", "file_error"]
+      "handlers": ["stream", "file"]
     }
   }
   

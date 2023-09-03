@@ -1,0 +1,54 @@
+import os.path as osp
+import logging
+import logging.config
+import warnings
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[0]
+
+from logger.helpers import get_config
+
+class Logger:
+    def __init__(self, name=None, log_stream_level="DEBUG", log_file_level="DEBUG", \
+                        log_dir=None, config_json=osp.join(ROOT, 'data/logging.json')):
+    
+        self._name = name 
+        self._log_stream_level = log_stream_level 
+        self._log_file_level = log_file_level 
+        self._log_dir = log_dir 
+        self._config_json = config_json
+        self._logger = None
+        
+        self._set()
+        self.info(f"Logger has been set with ")
+        
+    def _set(self):
+        try:
+            config = get_config(self._config_json, self._log_stream_level, \
+                                self._log_file_level, self._log_dir)
+            logging.config.dictConfig(config)
+            self._logger = logging.getLogger(self._name)
+        except Exception as e:
+            warnings.warn(f"Cannot define logger: {e}")
+            self._logger = None
+    
+    def debug(self, msg):
+        if self._logger != None:
+            self._logger.debug(msg)
+        
+    def info(self, msg):
+        if self._logger != None:
+            self._logger.info(msg)
+    
+    def warning(self, msg):
+        if self._logger != None:
+            self._logger.warning(msg)
+    
+    def error(self, msg):
+        if self._logger != None:
+            self._logger.error(msg)
+    
+    def critical(self, msg):
+        if self._logger != None:
+            self._logger.critical(msg)
+    
+    

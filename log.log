@@ -1,0 +1,14 @@
+2023-09-03 22:56:54 [INFO] Logger has been set with 
+2023-09-03 22:56:54 [INFO] set
+2023-09-03 22:56:54 [INFO] set_dataset
+2023-09-03 22:56:54 [INFO] set_model
+2023-09-03 22:56:54 [DEBUG] This is a debug message
+2023-09-03 22:56:54 [INFO] This is an info message
+2023-09-03 22:56:54 [WARNING] This is a warning message
+2023-09-03 22:56:54 [ERROR] This is an error message
+2023-09-03 22:56:54 [CRITICAL] This is a critical message
+2023-09-03 22:57:28 [INFO] Logger has been set with 
+2023-09-03 22:57:48 [ERROR] This is an error message
+2023-09-03 22:57:48 [CRITICAL] This is a critical message
+2023-09-03 22:58:23 [ERROR] This is an error message
+2023-09-03 22:58:23 [CRITICAL] This is a critical message
