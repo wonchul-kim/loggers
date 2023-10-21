@@ -2,7 +2,6 @@ import os.path as osp
 import logging
 import logging.config
 import warnings
-import importlib
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[0]
 
