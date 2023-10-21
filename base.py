@@ -44,4 +44,11 @@ if __name__ == '__main__':
     base.set_dataset()
     base.set_model()   
     base.test_log()     
-        
+
+    def func(a, b, c=None):
+        print(a, b)
+        print(c)
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    
+    base._logger.try_except_log(lambda: func(1), 'waht', post_action=lambda: func(1, 2))
+    print("awelkfjawlkefjawlkjfawlkejfawlkejf")

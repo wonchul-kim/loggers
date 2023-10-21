@@ -2,6 +2,7 @@ import os.path as osp
 import logging
 import logging.config
 import warnings
+import importlib
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[0]
 
@@ -51,4 +52,20 @@ class Logger:
         if self._logger != None:
             self._logger.critical(msg)
     
-    
+    def try_except_log(self, func, msg="", post_action=None):
+        try:
+            func()
+        except Exception as error_msg:
+            error_type = type(error_msg).__name__
+            if len(msg) != 0:
+                error_msg = msg + ", and "  + str(error_msg)
+            else:
+                error_msg = str(error_msg)
+            self._logger.error(f" [{self.try_except_log.__name__}] {error_type}: {error_msg}")
+            
+            if post_action is not None:
+                self.try_except_log(post_action, msg='In the post-action, ')
+            if error_type in __builtins__:
+                raise __builtins__[error_type](error_msg)
+            
+        
