@@ -53,6 +53,8 @@ class Logger:
     
     def try_except_log(self, func, msg="", post_action=None):
         try:
+            if msg == 'In the post-action, ':
+                self._logger.info("Post-action runs after rasing error")
             func()
         except Exception as error_msg:
             error_type = type(error_msg).__name__
