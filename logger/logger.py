@@ -3,6 +3,7 @@ import logging
 import logging.config
 import warnings
 from pathlib import Path
+import sys
 ROOT = Path(__file__).resolve().parents[0]
 
 from logger.helpers import get_config
@@ -51,7 +52,7 @@ class Logger:
         if self._logger != None:
             self._logger.critical(msg)
     
-    def try_except_log(self, func, msg="", post_action=None):
+    def try_except_log(self, func, msg="", post_action=None, exit=False):
         try:
             if msg == 'In the post-action, ':
                 self._logger.info("Post-action runs after rasing error")
@@ -67,6 +68,9 @@ class Logger:
             if post_action is not None:
                 self.try_except_log(post_action, msg='In the post-action, ')
             if error_type in __builtins__:
-                raise __builtins__[error_type](error_msg)
+                if not exit:
+                    raise __builtins__[error_type](error_msg)
+                else:
+                    sys.exit(1)
             
         
